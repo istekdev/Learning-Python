@@ -84,3 +84,7 @@ def saved():
     except Exception as e:
       print("ERR", e)
 
+# This uses concepts from days 1-7: def, if, else, elif, print, input, import (external), random, time, not, and str
+# This uses new concepts like upper, with, and import (locally)
+# Could not use for, class, ord, and random since encrypt.py uses it
+# Could not use eval since I don't know what do use it for (no non-linear math here)
