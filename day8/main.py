@@ -36,6 +36,7 @@ def granted():
       if choosenew.upper() == "WRITE":
         write()
       elif choosenew.upper() == "LEAVE":
+        encrypt.encryptsaves()
         enter = input("YOUR PASSWORD: ")
         encrypt.verify()
       elif choosenew.upper() == "SAVED":
