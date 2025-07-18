@@ -4,12 +4,13 @@ import os
 import main
 
 def encode():
+  global masterkey # Ohh this makes it global, nice
   masterkey = ""
   encryptedpass = ""
   for newchars in main.new:
     encryptedpass += str(ord(newchars))
     masterkey = str(random.randint(1, len(encryptedpass))
-  encodefinal = str(encryptedpass * masterkey)
+  encodefinal = int(encryptedpass) * int(masterkey) # In the end, these are still numbers
   with open("pass.txt", "w") as encryption:
     encryption.write(encodefinal)
   print("THIS IS YOUR MASTER KEY, THE ONLY KEY THAT CAN VERIFY YOUR PASSWORD, KEEP IT SAFE: ", encodefinal)
@@ -20,7 +21,7 @@ def verify():
   verification = input("WHAT IS YOUR MASTER KEY: ")
   with open("pass.txt", "r") as verifypass:
     passhash = verifypass.read()
-  dehash = str(passhash / verification)
+  dehash = int(passhash) / int(verification) # Still numbers
   while dehash != encryptedpass:
     wrong1 = input("INCORRECT - CHOOSE ACTION (REDOPASS/REDOKEY): ")
     if wrong1.upper() == "REDOPASS":
@@ -51,6 +52,6 @@ def decrypt():
     decrypted += decrypt2
 
 # This uses concepts from day 1-7: def, for, in, while, ord, str, time, random, except, if, else, elif, , import (external), and len
-# This uses new concepts like: with, upper, import (local), and chr
+# This uses new concepts like: with, upper, import (local), global, and chr
 # Sadly couldn't use class, eval, try, int, and range since idk what to do with those
   
