@@ -4,11 +4,11 @@ import os
 
 def detpass():
   new = input("SET PASSWORD: ")
-  encrypt.encode()
+  encrypt.encode(new)
 
 def currpass():
   enter = input("YOUR PASSWORD: ")
-  encrypt.verify()
+  encrypt.verify(enter)
 
 print("WELCOME TO PYVAULT")
 time.sleep(1)
@@ -36,12 +36,12 @@ def granted():
         new()
     else:
       choosenow = input("CHOOSE ACTION (WRITE/LEAVE/SAVED): ")
-      if choosenew.upper() == "WRITE":
+      if choosenow.upper() == "WRITE":
         write()
-      elif choosenew.upper() == "LEAVE":
+      elif choosenow.upper() == "LEAVE":
         encrypt.encryptsaves()
         currpass()
-      elif choosenew.upper() == "SAVED":
+      elif choosenow.upper() == "SAVED":
         saved()
 
 def write():
@@ -49,7 +49,7 @@ def write():
   print(str(encrypt.decrypted))
   time.sleep(1)
   writein = input("")
-  writeaction = input("CHOOSE ACTION (SAVE/LEAVE): "
+  writeaction = input("CHOOSE ACTION (SAVE/LEAVE): ")
   if writeaction.upper() == "SAVE":
     with open("vault.txt", "a") as writing:
         writing.write(str(writein))
@@ -63,7 +63,7 @@ def new():
   print(str(encrypt.decrypted))
   time.sleep(1)
   newin = input("")
-  newaction = input("CHOOSE ACTION (SAVE/LEAVE): "
+  newaction = input("CHOOSE ACTION (SAVE/LEAVE): ")
   if newaction.upper() == "SAVE":
     with open("vault.txt", "w") as overwrote:
         overwrote.write(str(newin))
