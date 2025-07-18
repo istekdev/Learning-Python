@@ -6,6 +6,10 @@ def detpass():
   new = input("SET PASSWORD: ")
   encrypt.encode()
 
+def currpass():
+  enter = input("YOUR PASSWORD: ")
+  encrypt.verify()
+
 print("WELCOME TO PYVAULT")
 time.sleep(1)
 
@@ -14,8 +18,8 @@ with open("pass.txt", "r") as password:
   if not psw:
     detpass()
   else:
-    enter = input("YOUR PASSWORD: ")
-    encrypt.verify()
+    currpass()
+
 
 def granted():
   print("ACCESS GRANTED - WELCOME TO MY VAULT")
@@ -27,8 +31,7 @@ def granted():
       if choosenew.upper() == "WRITE":
         write()
       elif choosenew.upper() == "LEAVE":
-        enter = input("YOUR PASSWORD: ")
-        encrypt.verify()
+        currpass()
       elif choosenew.upper() == "NEW":
         new()
     else:
@@ -37,8 +40,7 @@ def granted():
         write()
       elif choosenew.upper() == "LEAVE":
         encrypt.encryptsaves()
-        enter = input("YOUR PASSWORD: ")
-        encrypt.verify()
+        currpass()
       elif choosenew.upper() == "SAVED":
         saved()
 
