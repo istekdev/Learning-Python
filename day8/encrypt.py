@@ -1,7 +1,7 @@
 import time
 import random
 import os
-import main
+# Just removed import main, ciruclar imports (which means both files import each other and make a loop)
 
 masterkey = None
 encryptedpass = None # Something to do with making it a global var
@@ -16,7 +16,7 @@ def encode(password):
     encryption.write(encodefinal)
   print("THIS IS YOUR MASTER KEY, THE ONLY KEY THAT CAN VERIFY YOUR PASSWORD, KEEP IT SAFE: ", encodefinal)
   time.sleep(1)
-  main.currpass()
+  return masterkey
 
 def verify(password):
   verification = input("WHAT IS YOUR MASTER KEY: ")
@@ -30,7 +30,6 @@ def verify(password):
     elif wrong1.upper() == "REDOKEY":
       verification = input("WHAT IS YOUR MASTER KEY: ")
       verify()
-  granted()
 
 def encryptsaves():
   with open("vault.txt", "r") as toencrypt:
@@ -45,7 +44,7 @@ def decrypt():
   with open("vault.txt", "r") as writing:
     encryptedshi = writing.read()
   for blobs in encryptedshi:
-    decrypt1 = encryptedshi // masterkey
+    decrypt1 += blobs // masterkey
     decrypt2 = chr(decrypt1)
     decrypted += decrypt2
 
