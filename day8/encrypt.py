@@ -10,7 +10,7 @@ def encode():
   global masterkey, encryptedpass # Ohh this makes it global, nice
   for newchars in main.new:
     encryptedpass += str(ord(newchars))
-    masterkey = str(random.randint(1, len(encryptedpass))
+    masterkey = str(random.randint(1, len(encryptedpass)))
   encodefinal = int(encryptedpass) * int(masterkey) # In the end, these are still numbers
   with open("pass.txt", "w") as encryption:
     encryption.write(encodefinal)
