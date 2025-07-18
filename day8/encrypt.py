@@ -1,0 +1,56 @@
+import time
+import random
+import os
+import main
+
+def encode():
+  masterkey = ""
+  encryptedpass = ""
+  for newchars in main.new:
+    encryptedpass += str(ord(newchars))
+    masterkey = str(random.randint(1, len(encryptedpass))
+  encodefinal = str(encryptedpass * masterkey)
+  with open("pass.txt", "w") as encryption:
+    encryption.write(encodefinal)
+  print("THIS IS YOUR MASTER KEY, THE ONLY KEY THAT CAN RECOVER YOUR PASSWORD AND VERIFY IT, KEEP IT SAFE: ", encodefinal)
+  time.sleep(1)
+  main.currpass()
+
+def verify():
+  verification = input("WHAT IS YOUR MASTER KEY: ")
+  with open("pass.txt", "r") as verifypass:
+    passhash = verifypass.read()
+  dehash = str(passhash / verification)
+  while dehash != encryptedpass:
+    wrong1 = input("INCORRECT - CHOOSE ACTION (REDOPASS/REDOKEY): ")
+    if wrong1.upper() == "REDOPASS":
+      main.currpass()
+    elif wrong1.upper() == "REDOKEY":
+      verification = input("WHAT IS YOUR MASTER KEY: ")
+      verify()
+    else:
+      except Exception as e:
+        print("ERR:", e)
+  granted()
+
+def encryptsaves():
+  with open("vault.txt", "r") as toencrypt:
+    toencode = toencrypt.read()
+  for encryptors in toencode:
+      stage1 += str(ord(encryptors))
+      stage2 = stage1 * masterkey
+  with open("vault.txt", "w") as todoencrypt:
+    todoencrypt.write(str(stage2))
+
+def decrypt():
+  with open("vault.txt", "r") as writing:
+    encryptedshi = writing.read()
+  for blobs in encryptedshi:
+    decrypt1 = encryptedshi // masterkey
+    decrypt2 = chr(decrypt1)
+    decrypted += decrypt2
+
+# This uses concepts from day 1-7: def, for, in, while, ord, str, time, random, except, if, else, elif, , import (external), and len
+# This uses new concepts like: with, upper, import (local), and chr
+# Sadly couldn't use class, eval, try, int, and range since idk what to do with those
+  
