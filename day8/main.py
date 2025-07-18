@@ -82,7 +82,7 @@ def saved():
   elif savedaction.upper() == "N":
     saved()
 
-# This uses concepts from days 1-7: def, if, else, elif, print, input, import (external), random, time, not, except, and str
+# This uses concepts from days 1-7: def, if, else, elif, print, input, import (external), random, time, not, and str
 # This uses new concepts like upper, with, and import (locally)
 # Could not use for, ord, while, and random since encrypt.py uses it
-# Could not use eval since I don't know what do use it for (no non-linear math here) class, int, try, and range
+# Could not use eval since I don't know what do use it for (no non-linear math here) class, int, try, except, and range
