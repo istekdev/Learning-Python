@@ -12,7 +12,7 @@ def encode():
   encodefinal = str(encryptedpass * masterkey)
   with open("pass.txt", "w") as encryption:
     encryption.write(encodefinal)
-  print("THIS IS YOUR MASTER KEY, THE ONLY KEY THAT CAN RECOVER YOUR PASSWORD AND VERIFY IT, KEEP IT SAFE: ", encodefinal)
+  print("THIS IS YOUR MASTER KEY, THE ONLY KEY THAT CAN VERIFY YOUR PASSWORD, KEEP IT SAFE: ", encodefinal)
   time.sleep(1)
   main.currpass()
 
