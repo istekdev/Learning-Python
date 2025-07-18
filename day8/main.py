@@ -45,8 +45,7 @@ def granted():
         saved()
 
 def write():
-  with open("vault.txt", "r") as previous:
-      encrypt.decrypt()
+  encrypt.decrypt()
   print(str(encrypt.decrypted))
   time.sleep(1)
   writein = input("")
