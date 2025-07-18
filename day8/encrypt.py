@@ -3,10 +3,11 @@ import random
 import os
 import main
 
+masterkey = None
+encryptedpass = None # Something to do with making it a global var
+
 def encode():
-  global masterkey # Ohh this makes it global, nice
-  masterkey = ""
-  encryptedpass = ""
+  global masterkey, encryptedpass # Ohh this makes it global, nice
   for newchars in main.new:
     encryptedpass += str(ord(newchars))
     masterkey = str(random.randint(1, len(encryptedpass))
