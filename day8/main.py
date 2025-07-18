@@ -4,7 +4,7 @@ import os
 
 def detpass():
   new = input("SET PASSWORD: ")
-  encrypt.encode(new)
+  encrypt.encode(new) # Needs argument, I think it's to tell the function what varaible is being used?
 
 def currpass():
   enter = input("YOUR PASSWORD: ")
