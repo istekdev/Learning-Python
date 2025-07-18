@@ -81,9 +81,6 @@ def saved():
     granted()
   elif savedaction.upper() == "N":
     saved()
-  else:
-    except Exception as e:
-      print("ERR", e)
 
 # This uses concepts from days 1-7: def, if, else, elif, print, input, import (external), random, time, not, except, and str
 # This uses new concepts like upper, with, and import (locally)
