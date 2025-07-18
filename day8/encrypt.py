@@ -6,9 +6,9 @@ import main
 masterkey = None
 encryptedpass = None # Something to do with making it a global var
 
-def encode():
+def encode(password):
   global masterkey, encryptedpass # Ohh this makes it global, nice
-  for newchars in main.new:
+  for newchars in password:
     encryptedpass += str(ord(newchars))
     masterkey = str(random.randint(1, len(encryptedpass)))
   encodefinal = int(encryptedpass) * int(masterkey) # In the end, these are still numbers
@@ -18,7 +18,7 @@ def encode():
   time.sleep(1)
   main.currpass()
 
-def verify():
+def verify(password):
   verification = input("WHAT IS YOUR MASTER KEY: ")
   with open("pass.txt", "r") as verifypass:
     passhash = verifypass.read()
