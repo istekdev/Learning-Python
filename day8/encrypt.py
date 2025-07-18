@@ -30,9 +30,6 @@ def verify():
     elif wrong1.upper() == "REDOKEY":
       verification = input("WHAT IS YOUR MASTER KEY: ")
       verify()
-    else:
-      except Exception as e:
-        print("ERR:", e)
   granted()
 
 def encryptsaves():
@@ -52,7 +49,7 @@ def decrypt():
     decrypt2 = chr(decrypt1)
     decrypted += decrypt2
 
-# This uses concepts from day 1-7: def, for, in, while, ord, str, time, random, except, if, else, elif, , import (external), and len
+# This uses concepts from day 1-7: def, for, in, while, ord, str, time, random, if, else, elif, , import (external), and len
 # This uses new concepts like: with, upper, import (local), global, and chr
-# Sadly couldn't use class, eval, try, int, and range since idk what to do with those
+# Sadly couldn't use class, eval, try, int, except, and range since idk what to do with those
   
