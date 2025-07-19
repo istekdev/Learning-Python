@@ -37,7 +37,7 @@ def verify(password):
       enter = input("YOUR PASSWORD: ")
       verify(enter)
     elif wrong1.upper() == "REDOKEY":
-      return verify(password)
+      return verify(password) # Stops a logic bomb, calling it but not giving it anything in the argument params. It's like Python's paradox.
 
 def encryptsaves(data):
   stage1 = ""
