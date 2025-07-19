@@ -1,6 +1,5 @@
 import time
 import random
-import os
 # Just removed import main, ciruclar imports (which means both files import each other and make a loop)
 
 masterkey = ""
@@ -25,7 +24,10 @@ def verify(password):
   for c in password:
     encryptedpass += str(ord(c)).zfill(3)
   verification = input("WHAT IS YOUR MASTER KEY: ")
-  masterkey = verification
+  if not verification:
+    print("MASTER KEYS ARE NEVER ZERO")
+    time.sleep(1)
+    verify(password)
   with open("pass.txt", "r") as verifypass:
     passhash = int(verifypass.read())
   dehash = passhash // int(verification) # Still numbers
@@ -35,11 +37,11 @@ def verify(password):
       enter = input("YOUR PASSWORD: ")
       verify(enter)
     elif wrong1.upper() == "REDOKEY":
-      verify(enter)
+      return verify(password)
 
 def encryptsaves(data):
   stage1 = ""
-  with open("vault.txt", "r") as toencrypt:
+  with open("vault.txt", "r"):
     toencode = data.strip()
   if not toencode:
     return
