@@ -4,7 +4,7 @@ import encryption
 import system
 import os
 
-def encryption():
+def enping():
     encryption.ping()
     if encryption.ping() == True:
         print("encryption.py Downloaded")
@@ -13,7 +13,7 @@ def encryption():
         print("encryption.py Failed to Download")
         return False
     
-def system():
+def sysping():
     system.ping()
     if system.ping() == True:
         print("system.py Downloaded")
@@ -28,20 +28,11 @@ def txt():
     notepadtxt = ""
     secqtxt = ""
     secatxt = ""
-    if os.path.exists("hash.txt"):
+    if os.path.exists("hash.txt") and os.path.exists("bitcoin.txt") and os.path.exists("notepad.txt") and os.path.exists("secq.txt") and os.path.exists("seca.txt"):
         hashtxt = "exists"
-        print("hash.txt Downloaded")
-    elif os.path.exists("bitcoin.txt"):
-        print("bitcoin.txt Downloaded")
         btctxt = "exists"
-    elif os.path.exists("notepad.txt"):
-        print("notepad.txt Downloaded")
         notepadtxt = "exists"
-    elif os.path.exists("secq.txt"):
-        print("secq.txt Downloaded")
         secqtxt = "exists"
-    elif os.path.exists("seca.txt"):
-        print("seca.txt Downloaded")
         secatxt = "exists"
     else:
         hashtxt = "fail"
@@ -56,7 +47,7 @@ def txt():
         return False
     
 def verification():
-    if txt() and system() and encryption() == True:
+    if txt() and sysping() and enping() == True:
         print("5/5 Files Successfully Downloaded")
         return "All"
     else:
