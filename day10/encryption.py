@@ -10,6 +10,7 @@ decryption = ""
 secahash = ""
 hashedseca = ""
 finaldepass = ""
+decryptednotes = ""
 
 def ping():
   return True
@@ -79,3 +80,19 @@ def decryptsa(seca):
     despassout = stage3des[stage3des:stage3des+3]
     finaldespass += chr(int(despassout))
     return finaldespass
+  
+def decryptnotes():
+  global decryptednotes
+  decryptednotes = ""
+  with open("notepad.txt", "r") as np:
+    npdata = np.read().strip()
+  s1np += npdata // int(masterkey)
+  s2np += str(s1np)
+
+  while len(s2np) % 3 != 0:
+    s2np = "0" + s2np
+
+  for s3np in range(0, len(s2np), 3):
+    s4out = s3np[s3np:s3np+3]
+    decryptednotes += chr(int(s4out))
+    return decryptednotes
