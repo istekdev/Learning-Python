@@ -1,7 +1,7 @@
 import random
 import time
 
-maskerkey = 0
+masterkey = 0
 passhash = ""
 hashedpass = ""
 securityquestion = ""
@@ -21,10 +21,10 @@ def encryptpass(password):
   for passes in password:
     passhash += str(ord(passes))
   masterkey = random.randint(1, len(passhash)) * round(time.time())
-  hashedpass = passhash * str(masterkey)
-  print("THIS IS YOUR MASTER KEY, DO NOT LOSE IT. THIS WILL BE YOUR TWO-FACTOR AUTHENTICATION: " + masterkey)
+  hashedpass = int(passhash) * int(masterkey)
+  print("THIS IS YOUR MASTER KEY, DO NOT LOSE IT. THIS WILL BE YOUR TWO-FACTOR AUTHENTICATION: " + str(masterkey))
   with open("hash.txt", "w") as encryptingpass:
-    encryptingpass.write(hashedpass)
+    encryptingpass.write(str(hashedpass))
 
 def encryptnotes():
   with open("notepad.txt", "r") as readnotes:
@@ -35,7 +35,7 @@ def encryptnotes():
       notesread = readnotes.read().strip()
   for notes in notesread:
     encryptingnotes += str(ord(notes))
-  encryptingthenotes = encryptingnotes * str(masterkey)
+  encryptingthenotes = int(encryptingnotes) * int(masterkey)
   with open("notepad.txt", "w") as writenotes:
     writenotes.write(str(encryptingthenotes))
   print("NOTES SAVED")
@@ -45,11 +45,11 @@ def encryptseca(seca):
   secahash = ""
   for a in seca:
     secahash += str(ord(a))
-  hashedseca = secahash * str(masterkey)
+  hashedseca = int(secahash) * int(masterkey)
   with open("seca.txt", "w") as aa:
     aa.write(str(hashedseca))
 
-def decryptpass(password):
+def decryptpass():
   global finaldepass
   finaldepass = ""
   with open("hash.txt", "r") as password:
@@ -66,13 +66,13 @@ def decryptpass(password):
     return finaldepass
 
 def decryptsa(seca):
-  global finaldespass
+  global finaldespass, stage1des
+  stage1des = ""
   finaldespass = ""
   with open("seca.txt", "r") as seca:
-    desa = seca.read().strip()
+    desa = int(seca.read().strip())
   stage1des += desa // int(masterkey)
   stage2des += str(stage1des)
-
   while len(stage2des) % 3 != 0:
     stage2des = "0" + stage2des
 
