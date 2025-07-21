@@ -5,15 +5,14 @@
 # Also, I took a day-long break, so technically, this is day 10.
 
 import time
-import encryption
 import system
 import confirmation
 
 print("LOADING ASSETS...")
 time.sleep(1)
-confirmation.encryption()
+confirmation.enping()
 time.sleep(1)
-confirmation.system()
+confirmation.sysping()
 time.sleep(1)
 confirmation.txt()
 time.sleep(1)
