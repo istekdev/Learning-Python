@@ -107,7 +107,7 @@ def btcw():
 
 def btcm():
     nonce = random.randint(1, len(str(round(time.time()))))
-    guess = 0
+    guess = -1
     while guess != nonce:
         guess = random.randint(1, nonce)
         print("MINING. CURRENT GUESS - " + str(guess))
@@ -226,7 +226,6 @@ def write():
     writeinin = input("DO YOU WANT TO SAVE? [Y/N]: ")
     if writeinin.upper() == "Y":
         encryption.encryptnotes(writein)
-        print("NOTES SAVED")
         time.sleep(1)
         notepad()
     elif writeinin.upper() == "N":
@@ -242,7 +241,6 @@ def new():
     newinin = input("DO YOU WANT TO SAVE? [Y/N]: ")
     if newinin.upper() == "Y":
         encryption.encryptnotes(newin)
-        print("NOTES SAVED")
         time.sleep(1)
         notepad()
     elif newinin.upper() == "N":
@@ -435,13 +433,68 @@ def settings():
     time.sleep(1)
     settingin = input(">> ")
     if settingin.upper() == "[SECQ]":
-        encryption.changesecq()
+        choosesecq = input("NEW SECURITY QUESTION (L To Return): ")
+        if choosesecq.upper() == "L":
+            settings()
+            return
+        else:
+            with open("secq.txt", "w") as q:
+                q.write(choosesecq)
+                print("SUCCESSFULLY CHANGED SECURITY QUESTION")
+                time.sleep(1)
+                settings()
     elif settingin.upper() == "[SECA]":
-        encryption.changeseca()
+        verifysa = input("OLD SECURITY ANSWER (L To Return): ")
+        if verifysa.upper() == "L":
+            settings()
+            return
+        encryption.decryptseca(seca)
+        while verifysa != encryption.finaldespass:
+            print("INCORRECT")
+            time.sleep(1)
+            verifysa = input("OLD SECURITY ANSWER (L To Return): ")
+        chooseseca = input("NEW SECURITY ANSWER: ")
+        encryption.encryptseca(chooseseca)
+        print("SUCCESSFULLY CHANGED SECURITY ANSWER")
+        time.sleep(1)
+        settings()
     elif settingin.upper() == "[PASS]":
-        encryption.changepass()
+        verifypass = input("WHAT IS YOUR PASSWORD (L to Leave): ")
+        if verifypass.upper() == "L":
+            settings()
+            return
+        encryption.decryptpass()
+        while verifypass != encryption.finaldepass:
+            print("INCORRECT PASSWORD")
+            time.sleep(1)
+            verifypass = input("WHAT IS YOUR PASSWORD (L to Leave): ")
+        newpass = input("NEW PASSWORD: ")
+        encryption.encryptpass(newpass)
+        print("SUCCESSFULLY CHANGED PASSWORD")
+        time.sleep(1)
+        settings()
     elif settingin.upper() == "[MK]":
-        encryption.newkey()
+        verifymk = input("WHAT IS YOUR MASTER KEY (L to Leave): ")
+        if verifymk.upper() == "L":
+            settings()
+            return
+        while int(verifymk) != encryption.masterkey:
+            print("INCORRECT")
+            time.sleep(1)
+            verifymk = input("WHAT IS YOUR MASTER KEY (L to Leave): ")
+        with open("hash.txt", "r") as passhash:
+            passwa = passhash.read().strip()
+        depassed = encryption.decryptpass()
+        denotes = encryption.decryptnotes()
+        deseca = encryption.decryptsa()
+        newmk = random.randint(1, len(passwa)) * round(time.time())
+        encryption.masterkey = int(newmk)
+        encryption.encryptpass(depassed)
+        encryption.encryptseca(deseca)
+        encryption.encryptnotes(denotes)
+        print("THIS IS YOUR NEW MASTER KEY, DO NOT LOSE IT: " + str(encryption.masterkey))
+        time.sleep(1)
+        settings()
     elif settingin.upper() == "[LEAVE]":
         os()
     else:
