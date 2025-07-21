@@ -7,6 +7,9 @@ hashedpass = ""
 securityquestion = ""
 securityanswer = ""
 decryption = ""
+secahash = ""
+hashedseca = ""
+finaldepass = ""
 
 def ping():
   return True
@@ -32,11 +35,24 @@ def encryptnotes():
   for notes in notesread:
     encryptingnotes += str(ord(notes))
   encryptingthenotes = encryptingnotes * str(masterkey)
+  with open("notepad.txt", "w") as writenotes:
+    writenotes.write(str(encryptingthenotes))
   print("NOTES SAVED")
 
+def encryptseca(seca):
+  global secahash, hashedseca
+  secahash = ""
+  for a in seca:
+    secahash += str(ord(a))
+  hashedseca = secahash * str(masterkey)
+  with open("seca.txt", "w") as aa:
+    aa.write(str(hashedseca))
+
 def decryptpass(password):
-  with open("hash.txt", "r") as decryptionhash:
-    dehash = decryptionhash.read().strip()
+  global finaldepass
+  finaldepass = ""
+  with open("hash.txt", "r") as password:
+    dehash = password.read().strip()
   stage1de += dehash // int(masterkey)
   stage2de += str(stage1de)
 
@@ -46,3 +62,20 @@ def decryptpass(password):
   for stage3de in range(0, len(stage2de), 3):
     depassout = stage3de[stage3de:stage3de+3]
     finaldepass += chr(int(depassout))
+    return finaldepass
+
+def decryptsa(seca):
+  global finaldespass
+  finaldespass = ""
+  with open("seca.txt", "r") as seca:
+    desa = seca.read().strip()
+  stage1des += desa // int(masterkey)
+  stage2des += str(stage1des)
+
+  while len(stage2des) % 3 != 0:
+    stage2des = "0" + stage2des
+
+  for stage3des in range(0, len(stage2des), 3):
+    despassout = stage3des[stage3des:stage3des+3]
+    finaldespass += chr(int(despassout))
+    return finaldespass
