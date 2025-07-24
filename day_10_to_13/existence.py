@@ -18,9 +18,9 @@ def verifyfiles():
         moneytxt = "exists"
         bitcointxt = "exists"
         print("IMPORTING TXT FILES SUCCESSFUL")
-    bitcoin.ping()
-    gambling.ping()
-    if bitcoin.ping() and gambling.ping() and moneytxt and bitcointxt == "exists":
+    bp = bitcoin.ping()
+    gp = gambling.ping()
+    if bp and gp and moneytxt == "exists" and bitcointxt == "exists":
         print("5/5 FILES SUCCESSFULLY IMPORTED")
     else:
         print("ERROR - FILES FAILED TO LOAD")
