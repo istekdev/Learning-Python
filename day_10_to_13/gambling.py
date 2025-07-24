@@ -11,7 +11,7 @@ def roulette():
         cr = checkb.read()
     if bet.upper() == "L":
         options()
-    while cr < bet:
+    while float(cr) < float(bet):
         print("YOU DO NOT HAVE ENOUGH")
         time.sleep(1)
         roulette()
@@ -20,15 +20,21 @@ def roulette():
     uchoose = input("BLACK OR RED: ")
     if spinner in [2, 4, 6, 8, 10]:
         color = "BLACK"
-    elif spinner == [1, 3, 5, 7, 9]:
+    elif spinner in [1, 3, 5, 7, 9]:
         color = "RED"
+    for countdown in range(5, 0, -1):
+        print(countdown)
+        time.sleep(1)
+    print("YOUR BET WAS ON " + uchoose)
+    time.sleep(1)
+    print("THE COLOR SELECTED IS " + color)
     if uchoose == color:
         with open("money.txt", "r") as readb:
             balance = readb.read()
-        addwins = float(balance) * 2
+        addwins = (float(bet) * 2) + float(balance)
         with open("money.txt", "w") as addwinnings:
             addwinnings.write(str(addwins))
-        print("YOU JUST WON $" + str(addwins))
+        print("YOU JUST WON $" + str(bet))
         time.sleep(1)
         playagain = input("PLAY AGAIN? (Y/N): ")
         if playagain.upper() == "Y":
@@ -45,7 +51,7 @@ def roulette():
         addloss = float(balance) - int(bet)
         with open("money.txt", "w") as addlosses:
             addlosses.write(str(addloss))
-        print("YOU JUST LOST $" + str(addloss))
+        print("YOU JUST LOST $" + str(bet))
         time.sleep(1)
         playagain = input("PLAY AGAIN? (Y/N): ")
         if playagain.upper() == "Y":
@@ -63,7 +69,7 @@ def guess():
         cr = checkb.read()
     if bet.upper() == "L":
         options()
-    while cr < bet:
+    while float(cr) < float(bet):
         print("YOU DO NOT HAVE ENOUGH")
         time.sleep(1)
         guess()
@@ -78,7 +84,7 @@ def guess():
     if int(guessin) == winning:
         with open("money.txt", "r") as readb:
             balance = readb.read()
-        addwins = float(balance) * 2
+        addwins = (float(bet) * 2) + balance
         with open("money.txt", "w") as addwinnings:
             addwinnings.write(str(addwins))
         print("YOU JUST WON $" + str(addwins))
@@ -98,7 +104,7 @@ def guess():
         addloss = float(balance) - int(bet)
         with open("money.txt", "w") as addlosses:
             addlosses.write(str(addloss))
-        print("YOU JUST LOST $" + str(addloss))
+        print("YOU JUST LOST $" + str(bet))
         time.sleep(1)
         playagain = input("PLAY AGAIN? (Y/N): ")
         if playagain.upper() == "Y":
@@ -114,10 +120,35 @@ def guess():
         time.sleep(1)
         guess()
 
+def menu():
+    print("BITCOIN MENU")
+    print("---")
+    print("[BUY] - Buy BTC")
+    print("[SELL] - Sell BTC")
+    print("[MINE] - Mine BTC (At $200)")
+    print("[WALLET] - Bitcoin Wallet")
+    print("[LEAVE] - Leave")
+    time.sleep(1)
+    btcin = input(">> ")
+    if btcin.upper() == "[BUY]":
+        bitcoin.buy()
+    elif btcin.upper() == "[SELL]":
+        bitcoin.sell()
+    elif btcin.upper() == "[MINE]":
+        bitcoin.mine()
+    elif btcin.upper() == "[WALLET]":
+        bitcoin.wallet()
+    elif btcin.upper() == "[LEAVE]":
+        options()
+    else:
+        print("ERROR - DOES NOT EXIST")
+        time.sleep(1)
+        menu()
+        
+
 def options():
     print("GAMBLEPY MENU")
     print("---")
-    time.sleep(1)
     print("[ROULETTE] - Roulette")
     print("[GUESS] - Guess the Number")
     print("[BTC] - Bitcoin Menu")
@@ -128,7 +159,7 @@ def options():
     elif gambler.upper() == "[GUESS]":
         guess()
     elif gambler.upper() == "[BTC]":
-        bitcoin.menu()
+        menu()
     else:
         print("ERROR - DOES NOT EXIST")
         time.sleep(1)
