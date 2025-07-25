@@ -163,21 +163,20 @@ def stats():
     epoch = time.time()
     local = time.localtime(epoch)
     times = time.strftime("%H:%M:%S", local)
-    date = time.strftime("%M/%D/%Y", local)
-    used = 17 / 23
-    notused = 6 / 23
+    date = time.strftime("%D", local)
+    used = float(round((17 / 23 * 100)))
+    notused = float(round((6 / 23 * 100)))
     tdy = PYDAY(14)
-    tdy.today()
     print("CURRENT TIME (MILITARY TIME): ", times)
     print("CURRENT DATE: ", date)
     print(tdy.today())
     print("CONCEPTS CURRENTLY USED: def, if, else, elif, print, time, random, with, class, for, range, str, int, float, upper, while, and continue")
     print("CONCEPTS NOT USED: break, ord, eval, chr, try, and except")
-    print("USED PERCENTILE: " + float(str(used)) + "%")
-    print("NOT USED PERCENTILE: " + float(str(notused)) + "%")
+    print("USED PERCENTILE: " + str(used) + "%")
+    print("NOT USED PERCENTILE: " + str(notused) + "%")
     print("MY NOTES: I sadly couldn't use all concepts like I always wanted to. And I could only follow through 50 percent of today's goal to use break and continue. But at least I had fun :P")
     time.sleep(1)
-    menu()
+    options()
 
 def options():
     print("GAMBLEPY MENU")
