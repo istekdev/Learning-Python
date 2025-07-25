@@ -5,6 +5,13 @@ import bitcoin
 def ping():
     return "exists"
 
+class PYDAY:
+    def __init__(self, day):
+        self.day = day
+    
+    def today(self):
+        print(f"CURRENT DAY OF LEARNING PYTHON: {self.day}")
+
 def roulette():
     bet = input("PLACE YOUR BET (Or L to Leave): ")
     with open("money.txt", "r") as checkb:
@@ -144,22 +151,54 @@ def menu():
         print("ERROR - DOES NOT EXIST")
         time.sleep(1)
         menu()
-        
+
+def ba():
+    with open("money.txt") as balance:
+        cash = balance.read()
+    print("YOUR BALANCE: $" + str(cash))
+    time.sleep(1)
+    options()
+
+def stats():
+    epoch = time.time()
+    local = time.localtime(epoch)
+    times = time.strftime("%H:%M:%S", local)
+    date = time.strftime("%M/%D/%Y", local)
+    used = 17 / 23
+    notused = 6 / 23
+    tdy = PYDAY(14)
+    tdy.today()
+    print("CURRENT TIME (MILITARY TIME): ", times)
+    print("CURRENT DATE: ", date)
+    print(tdy.today())
+    print("CONCEPTS CURRENTLY USED: def, if, else, elif, print, time, random, with, class, for, range, str, int, float, upper, while, and continue")
+    print("CONCEPTS NOT USED: break, ord, eval, chr, try, and except")
+    print("USED PERCENTILE: " + float(str(used)) + "%")
+    print("NOT USED PERCENTILE: " + float(str(notused)) + "%")
+    print("MY NOTES: I sadly couldn't use all concepts like I always wanted to. And I could only follow through 50 percent of today's goal to use break and continue. But at least I had fun :P")
+    time.sleep(1)
+    menu()
 
 def options():
     print("GAMBLEPY MENU")
     print("---")
+    print("[STATS] - Statistics")
     print("[ROULETTE] - Roulette")
     print("[GUESS] - Guess the Number")
     print("[BTC] - Bitcoin Menu")
+    print("[BA] - Bank Balance")
     time.sleep(1)
     gambler = input(">> ")
     if gambler.upper() == "[ROULETTE]":
         roulette()
+    elif gambler.upper() == "[STATS]":
+        stats()
     elif gambler.upper() == "[GUESS]":
         guess()
     elif gambler.upper() == "[BTC]":
         menu()
+    elif gambler.upper() == "[BA]":
+        ba()
     else:
         print("ERROR - DOES NOT EXIST")
         time.sleep(1)
