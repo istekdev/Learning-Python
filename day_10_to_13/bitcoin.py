@@ -52,6 +52,7 @@ def wallet():
 def mine():
     guess = 0
     nonce = random.randint(1, 1000000)
+    starting = time.time()
     with open("money.txt", "r") as b:
         balance = b.read()
     with open("money.txt", "r") as bank:
@@ -68,6 +69,9 @@ def mine():
     while guess != nonce:
         guess = random.randint(1, 1000000)
         print("MINING - CURRENT GUESS: " + str(guess))
+        if time.time() - starting > 120:
+            print("FAILED TO SOLVE A BLOCK - EXITING...")
+            continue
     with open("btc.txt", "r") as balance:
         bbb = balance.read()
         if not bbb:
