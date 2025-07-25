@@ -71,7 +71,7 @@ def mine():
         print("MINING - CURRENT GUESS: " + str(guess))
         if time.time() - starting > 120:
             print("FAILED TO SOLVE A BLOCK - EXITING...")
-            continue
+            break
     with open("btc.txt", "r") as balance:
         bbb = balance.read()
         if not bbb:
